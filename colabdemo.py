@@ -493,7 +493,7 @@ def imageflow_demo(predictor, vis_folder, current_time, args):
         else:
             break
 
-def webcamdemo(predictor, vis_folder, current_time, args):
+def colabcamdemo(predictor, vis_folder, current_time, args):
     # start streaming video from webcam
     video_stream()
     # label for video
@@ -643,8 +643,11 @@ def main(exp, args):
     current_time = time.localtime()
     if args.demo == "image":
         image_demo(predictor, vis_folder, args.path, current_time, args.save_result)
-    elif args.demo == "video" or args.demo == "webcam":
+    elif args.demo == "video":
         imageflow_demo(predictor, vis_folder, current_time, args)
+    elif args.demo == "colabcam":
+        colabcamdemo(predictor, vis_folder, current_time, args)
+
 
 
 if __name__ == "__main__":
