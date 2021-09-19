@@ -184,7 +184,7 @@ class Tracker():
                     continue
                 color = compute_color_for_labels(int(class_id))
                 UI_box((x1, y1, x2, y2), image, label=class_names[int(class_id)], color=color, line_thickness=2)
-                bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
+                bbox_xywh.append(xyxy_to_xywh((x1, y1, x2, y2)))
                 scores.append(score)
                 
             bbox_xywh = torch.Tensor(bbox_xywh)
@@ -215,7 +215,7 @@ if __name__=='__main__':
         if ret_val:
             img_visual, bbox = tracker.update(frame)  # feed one frame and get result
             vid_writer.write(img_visual)
-            if frame_count == 100:
+            if frame_count == 500:
                 break
             frame_count +=1
             ch = cv2.waitKey(1)
