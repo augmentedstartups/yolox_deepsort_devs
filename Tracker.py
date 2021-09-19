@@ -49,13 +49,13 @@ def compute_color_for_labels(label):
     """
     Simple function that adds fixed color depending on the class
     """
-    if label == "person": #person  #BGR
+    if label == 0: #person  #BGR
         color = (85,45,255)
-    elif label == "car": # Car
+    elif label == 2: # Car
         color = (222,82,175)
-    elif label == "motorbike":  # Motobike
+    elif label == 3:  # Motobike
         color = (0, 204, 255)
-    elif label == "bus":  # Bus
+    elif label == 5:  # Bus
         color = (0, 149, 255)
     else:
         color = [int((p * (label ** 2 - label + 1)) % 255) for p in palette]
@@ -181,7 +181,7 @@ class Tracker():
             for (x1, y1, x2, y2), class_id, score  in zip(info['boxes'],info['class_ids'],info['scores']):
                 if self.filter_class and class_names[int(class_id)] not in self.filter_class:
                     continue
-                color = compute_color_for_labels(class_names[int(class_id)]) # chanege the function to get names
+                color = compute_color_for_labels(int(class_id))
                 UI_box((x1, y1, x2, y2), image, label=label, color=color, line_thickness=2)
                 bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
                 scores.append(score)
