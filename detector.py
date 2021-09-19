@@ -26,7 +26,7 @@ class Predictor():
 
     def inference(self, img, visual=True, conf=0.5):
         img_info = {"id": 0}
-        img = img.to(self.device)
+        
         if isinstance(img, str):
             img_info["file_name"] = os.path.basename(img)
             img = cv2.imread(img)
@@ -42,7 +42,7 @@ class Predictor():
         img = torch.from_numpy(img).unsqueeze(0)
         img = img.float()
         
-        if self.device == "gpu":
+        if self.device == "cuda":
             img = img.cuda()
             img = img.half()  # to FP16
 
