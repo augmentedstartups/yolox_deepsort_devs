@@ -195,3 +195,34 @@ class Tracker():
                 draw_boxes(im0, bbox_xyxy, object_id,identities)
 
         return image, outputs
+
+if __name__=='__main__':
+    tracker = Tracker(filter_class=None, model='yolox-s', ckpt='/content/yolox_deepsort_devs/weights/yolox_s.pth')    # instantiate Tracker
+
+    cap = cv2.VideoCapture('video.mp4') 
+    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)  # float
+    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)  # float
+    fps = cap.get(cv2.CAP_PROP_FPS)
+
+    vid_writer = cv2.VideoWriter(
+        'video_tracked.mp4', cv2.VideoWriter_fourcc(*"mp4v"), fps, (int(width), int(height))
+    ) # open one video
+    frame_count = 0
+    while True:
+        ret_val, frame = cap.read() # read frame from video
+        
+        if ret_val:
+            img_visual, bbox = tracker.update(frame)  # feed one frame and get result
+            vid_writer.write(img_visual)
+            if frame_count == 100:
+                break
+            frame_count +=1
+            ch = cv2.waitKey(1)
+            if ch == 27 or ch == ord("q") or ch == ord("Q"):
+                break
+        else:
+            break
+
+    cap.release()
+    vid_writer.release()
+    cv2.destroyAllWindows()
