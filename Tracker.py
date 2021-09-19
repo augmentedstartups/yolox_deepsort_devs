@@ -182,7 +182,7 @@ class Tracker():
                 if self.filter_class and class_names[int(class_id)] not in self.filter_class:
                     continue
                 color = compute_color_for_labels(int(class_id))
-                UI_box((x1, y1, x2, y2), image, label=label, color=color, line_thickness=2)
+                UI_box((x1, y1, x2, y2), image, label=class_names[int(class_id)], color=color, line_thickness=2)
                 bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
                 scores.append(score)
                 
