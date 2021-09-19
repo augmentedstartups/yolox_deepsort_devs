@@ -23,7 +23,7 @@ class Predictor():
         self.preproc = ValTransform(legacy=False)
 
 
-    def inference(self, raw_img, visual=True, conf=0.5):
+    def inference(self, img, visual=True, conf=0.5):
         img_info = {"id": 0}
         if isinstance(img, str):
             img_info["file_name"] = os.path.basename(img)
@@ -31,8 +31,9 @@ class Predictor():
         else:
             img_info["file_name"] = None
 
+        info['img'] = img
         height, width = img.shape[:2]
-        img_info["height"], img_info["width"], img_info["raw_img"]  = height, width, img
+        img_info["height"], img_info["width"], img_info["img"]  = height, width, img
         ratio = min(self.test_size[0] / img.shape[0], self.test_size[1] / img.shape[1])
         img_info["ratio"] = ratio
         img, _ = self.preproc(img, None, self.test_size)
@@ -56,7 +57,7 @@ class Predictor():
         img_info['box_nums'] = outputs.shape[0]
 
         if visual:
-            img_info['visual'] = vis(img_info['raw_img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
+            img_info['visual'] = vis(img_info['img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
 
         logger.img_info("Infer time: {:.4f}s".format(time.time() - t0))
         return img_info
