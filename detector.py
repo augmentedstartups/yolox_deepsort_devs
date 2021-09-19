@@ -20,7 +20,7 @@ class Predictor():
         self.model.eval()
         checkpoint = torch.load(ckpt, map_location="cpu")
         self.model.load_state_dict(checkpoint["model"])
-        self.preproc = ValTransform(legacy=legacy)
+        self.preproc = ValTransform(legacy=False)
 
 
     def inference(self, raw_img, visual=True, conf=0.5):
