@@ -1,6 +1,6 @@
 import sys
 sys.path.insert(0, './YOLOX')
-from YOLOX.yolox.data.datasets.coco_classes import COCO_CLASSES
+from yolox.data.datasets.coco_classes import COCO_CLASSES
 from detector import Predictor
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
