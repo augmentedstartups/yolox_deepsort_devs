@@ -7,6 +7,7 @@ from deep_sort.deep_sort import DeepSort
 import torch
 import cv2
 from yolox.utils import vis
+import numpy as np
 
 _COLORS = np.array(
     [
