@@ -26,6 +26,7 @@ class Predictor():
 
     def inference(self, img, visual=True, conf=0.5):
         img_info = {"id": 0}
+        img = img.to(self.device)
         if isinstance(img, str):
             img_info["file_name"] = os.path.basename(img)
             img = cv2.imread(img)
@@ -64,6 +65,43 @@ class Predictor():
         return img_info
     
     
+    # def inference(self, img):
+    #     img_info = {"id": 0}
+    #     if isinstance(img, str):
+    #         img_info["file_name"] = os.path.basename(img)
+    #         img = cv2.imread(img)
+    #     else:
+    #         img_info["file_name"] = None
+
+    #     height, width = img.shape[:2]
+    #     img_info["height"] = height
+    #     img_info["width"] = width
+    #     img_info["raw_img"] = img
+
+    #     ratio = min(self.test_size[0] / img.shape[0], self.test_size[1] / img.shape[1])
+    #     img_info["ratio"] = ratio
+
+    #     img, _ = self.preproc(img, None, self.test_size)
+    #     img = torch.from_numpy(img).unsqueeze(0)
+    #     img = img.float()
+    #     if self.device == "gpu":
+    #         img = img.cuda()
+    #         if self.fp16:
+    #             img = img.half()  # to FP16
+
+    #     with torch.no_grad():
+    #         t0 = time.time()
+    #         outputs = self.model(img)
+    #         if self.decoder is not None:
+    #             outputs = self.decoder(outputs, dtype=outputs.type())
+    #         outputs = postprocess(
+    #             outputs, self.num_classes, self.confthre,
+    #             self.nmsthre, class_agnostic=True
+    #         )
+    #         logger.info("Infer time: {:.4f}s".format(time.time() - t0))
+    #     return outputs, img_info
+
+
 if __name__=='__main__':
     predictor = Predictor()
     img = cv2.imread('img.jpeg')
