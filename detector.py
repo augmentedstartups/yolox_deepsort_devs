@@ -11,7 +11,7 @@ from yolox.utils import postprocess, vis
 
 class Predictor():
     def __init__(self, model='yolox-s', ckpt='yolox_s.pth', visual=True):
-        super(Detector, self).__init__()
+        super(Predictor, self).__init__()
         self.device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
         self.exp = get_exp_by_name(model)
         self.test_size = self.exp.test_size  
