@@ -130,7 +130,7 @@ def vis_track(img, boxes):
     return img
 
 class Tracker():
-    def __init__(self, filter_class=None, model='yolox-s', ckpt='yolox_s.pth.tar', ):
+    def __init__(self, filter_class=None, model='yolox-s', ckpt='yolox_s.pth'):
         self.detector = Predictor(model, ckpt)
         cfg = get_config()
         cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
