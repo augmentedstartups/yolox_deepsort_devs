@@ -184,8 +184,10 @@ class Tracker():
                     continue
                 color = compute_color_for_labels(int(class_id))
                 UI_box([x1, y1, x2, y2], image, label=class_names[int(class_id)], color=color, line_thickness=2)
-                bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
-                bbox_xywh.append(xyxy_to_xywh(*xyxy))
+                # bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
+                
+                xywh = xyxy_to_xywh([x1, y1, x2, y2])
+                bbox_xywh.append(xywh)
                 scores.append(score)
                 
             bbox_xywh = torch.Tensor(bbox_xywh)
