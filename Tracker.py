@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, './YOLOX')
 from YOLOX.yolox.data.datasets.coco_classes import COCO_CLASSES
-from detector import Detector
+from detector import Predictor
 from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
 import torch
@@ -45,7 +45,7 @@ def vis_track(img, boxes):
 
 class Tracker():
     def __init__(self, filter_class=None, model='yolox-s', ckpt='yolox_s.pth.tar', ):
-        self.detector = Detector(model, ckpt)
+        self.detector = Predictor(model, ckpt)
         cfg = get_config()
         cfg.merge_from_file("deep_sort/configs/deep_sort.yaml")
         self.deepsort = DeepSort(cfg.DEEPSORT.REID_CKPT,
@@ -56,7 +56,7 @@ class Tracker():
         self.filter_class = filter_class
 
     def update(self, image):
-        info = self.detector.detect(image, visual=False)
+        _,info = self.detector.inference(image, visual=False)
         outputs = []
         if info['box_nums']>0:
             bbox_xywh = []
