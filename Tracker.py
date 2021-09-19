@@ -13,6 +13,7 @@ import numpy as np
 
 
 class_names = COCO_CLASSES
+TRAIL_LEN = 64
 
 from collections import deque
 
@@ -128,7 +129,7 @@ def draw_boxes(img, bbox, object_id, identities=None, offset=(0, 0)):
 
         # create new buffer for new object
         if id not in data_deque:  
-          data_deque[id] = deque(maxlen= opt.trailslen)
+          data_deque[id] = deque(maxlen= TRAIL_LEN)
 
         color = compute_color_for_labels(object_id[i])
 
@@ -144,7 +145,7 @@ def draw_boxes(img, bbox, object_id, identities=None, offset=(0, 0)):
                 continue
 
             # generate dynamic thickness of trails
-            thickness = int(np.sqrt(opt.trailslen / float(i + i)) * 1.5)
+            thickness = int(np.sqrt(TRAIL_LEN / float(i + i)) * 1.5)
             
             # draw trails
             cv2.line(img, data_deque[id][i - 1], data_deque[id][i], color, thickness)
