@@ -62,7 +62,7 @@ class Predictor():
             img_info['visual'] = vis(img_info['img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
 
         logger.info("Infer time: {:.4f}s".format(time.time() - t0))
-        return img_info
+        return outputs, img_info
     
     
 
@@ -71,6 +71,6 @@ class Predictor():
 if __name__=='__main__':
     predictor = Predictor()
     img = cv2.imread('img.jpeg')
-    out = predictor.inference(img)
+    out, img = predictor.inference(img)
     print(out.keys())
   
