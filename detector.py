@@ -71,6 +71,6 @@ class Predictor():
 if __name__=='__main__':
     predictor = Predictor()
     img = cv2.imread('img.jpeg')
-    out, img = predictor.inference(img)
+    out, img_info = predictor.inference(img)
     print(out.keys())
   
