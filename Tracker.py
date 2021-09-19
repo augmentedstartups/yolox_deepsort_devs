@@ -6,7 +6,9 @@ from deep_sort.utils.parser import get_config
 from deep_sort.deep_sort import DeepSort
 import torch
 import cv2
-from yolox.utils import vis, vis_track
+from yolox.utils import vis
+from yolox.utils.visualize import vis_track
+
 import numpy as np
 
 
