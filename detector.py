@@ -31,7 +31,7 @@ class Predictor():
         else:
             img_info["file_name"] = None
 
-        info['img'] = img
+        img_info['img'] = img
         height, width = img.shape[:2]
         img_info["height"], img_info["width"], img_info["img"]  = height, width, img
         ratio = min(self.test_size[0] / img.shape[0], self.test_size[1] / img.shape[1])
