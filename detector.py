@@ -42,7 +42,7 @@ class Predictor():
         img = torch.from_numpy(img).unsqueeze(0)
         img = img.float()
         
-        if self.device == "cuda":
+        if self.device == torch.device('cuda'):
             img = img.cuda()
             img = img.half()  # to FP16
 
