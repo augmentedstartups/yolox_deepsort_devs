@@ -31,7 +31,7 @@ def xyxy_to_xywh(*xyxy):
     y_c = (bbox_top + bbox_h / 2)
     w = bbox_w
     h = bbox_h
-    return x_c, y_c, w, h
+    return (x_c, y_c, w, h)
 
 def xyxy_to_tlwh(bbox_xyxy):
     tlwh_bboxs = []
