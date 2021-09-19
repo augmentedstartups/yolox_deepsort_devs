@@ -31,7 +31,7 @@ def xyxy_to_xywh(*xyxy):
     y_c = (bbox_top + bbox_h / 2)
     w = bbox_w
     h = bbox_h
-    return (x_c, y_c, w, h)
+    return [x_c, y_c, w, h]
 
 def xyxy_to_tlwh(bbox_xyxy):
     tlwh_bboxs = []
@@ -184,6 +184,7 @@ class Tracker():
                     continue
                 color = compute_color_for_labels(int(class_id))
                 UI_box(*xyxy, image, label=class_names[int(class_id)], color=color, line_thickness=2)
+                # bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])
                 bbox_xywh.append(xyxy_to_xywh(*xyxy))
                 scores.append(score)
                 
