@@ -179,12 +179,12 @@ class Tracker():
             bbox_xywh = []
             scores = []
             #bbox_xywh = torch.zeros((info['box_nums'], 4))
-            for (x1, y1, x2, y2), class_id, score  in zip(info['boxes'],info['class_ids'],info['scores']):
+            for *xyxy, class_id, score  in zip(info['boxes'],info['class_ids'],info['scores']):
                 if self.filter_class and class_names[int(class_id)] not in self.filter_class:
                     continue
                 color = compute_color_for_labels(int(class_id))
-                UI_box((x1, y1, x2, y2), image, label=class_names[int(class_id)], color=color, line_thickness=2)
-                bbox_xywh.append(xyxy_to_xywh((x1, y1, x2, y2)))
+                UI_box(*xyxy, image, label=class_names[int(class_id)], color=color, line_thickness=2)
+                bbox_xywh.append(xyxy_to_xywh(*xyxy))
                 scores.append(score)
                 
             bbox_xywh = torch.Tensor(bbox_xywh)
