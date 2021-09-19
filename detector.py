@@ -61,7 +61,7 @@ class Predictor():
         if visual:
             img_info['visual'] = vis(img_info['img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
 
-        logger.img_info("Infer time: {:.4f}s".format(time.time() - t0))
+        logger.info("Infer time: {:.4f}s".format(time.time() - t0))
         return img_info
     
     
