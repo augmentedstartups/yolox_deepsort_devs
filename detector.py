@@ -44,7 +44,7 @@ class Predictor():
         
         if self.device == torch.device('cuda'):
             img = img.cuda()
-            img = img.half()  # to FP16
+            # img = img.half()  # to FP16
 
         with torch.no_grad():
             t0 = time.time()
