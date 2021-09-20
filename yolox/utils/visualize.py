@@ -148,7 +148,7 @@ _COLORS = np.array(
 ).astype(np.float32).reshape(-1, 3)
 
 
-def vis_track(img, boxes, object_id):
+def vis_track(img, boxes):
     
     for i in range(len(boxes)):
         box = boxes[i]
