@@ -171,15 +171,11 @@ class Predictor(object):
         if output is None:
             return img
         output = output.cpu()
-
         bboxes = output[:, 0:4]
-
         # preprocessing: resize
         bboxes /= ratio
-
         cls = output[:, 6]
         scores = output[:, 4] * output[:, 5]
-
         vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
         return vis_res
 
