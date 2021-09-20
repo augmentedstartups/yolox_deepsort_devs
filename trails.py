@@ -277,7 +277,7 @@ def detect(save_img=False):
                     confs.append([conf.item()])
                     label = '%s' % (names[int(cls)])
                     color = compute_color_for_labels(int(cls))
-                    UI_box(xyxy, im0, label=label, color=color, line_thickness=2)
+                    # UI_box(xyxy, im0, label=label, color=color, line_thickness=2)
                     oids.append(int(cls))
 
                     if save_txt:  # Write to file
