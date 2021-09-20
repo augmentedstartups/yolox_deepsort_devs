@@ -74,7 +74,7 @@ if __name__=='__main__':
         x = [10,10 , 30,30]
         c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
         label = "FPS: %.2f"%(fps)
-        UI_box(x, frame, (211, 232, 21), label, 4, boundingbox)
+        UI_box(x, frame, (211, 232, 21), label, 4, False)
         t1 = time.time()
         if ret_val:
             img_visual, bbox = tracker.update(frame)  # feed one frame and get result
