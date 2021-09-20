@@ -32,7 +32,7 @@ class Tracker():
                             use_cuda=True)
         self.filter_class = filter_class
     def update(self, image):
-        _,info = self.detector.inference(image, visual=False)
+        _,info = self.detector.inference(image, visual=True)
         outputs = []
         if info['box_nums']>0:
             bbox_xywh = []
