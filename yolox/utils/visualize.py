@@ -7,7 +7,7 @@ import numpy as np
 from numpy import random
 from collections import deque
 
-pts = [deque(maxlen=30) for _ in range(9999)]
+pts = {}
 
 __all__ = ["vis"]
 
@@ -149,6 +149,10 @@ _COLORS = np.array(
 
 
 def vis_track(img, boxes):
+
+    for key in list(pts):
+      if key not in boxes[:, -2]:
+        pts.pop(key)
     
     for i in range(len(boxes)):
         box = boxes[i]
@@ -158,6 +162,9 @@ def vis_track(img, boxes):
         y1 = int(box[3])
 
         id = box[4]
+        if id not in pts:
+          pts[id] = deque(maxlen= opt.trailslen)
+
         clsid = box[5]
 
         color = compute_color_for_labels(clsid)
