@@ -31,7 +31,6 @@ class Tracker():
                             max_age=cfg.DEEPSORT.MAX_AGE, n_init=cfg.DEEPSORT.N_INIT, nn_budget=cfg.DEEPSORT.NN_BUDGET,
                             use_cuda=True)
         self.filter_class = filter_class
-
     def update(self, image):
         _,info = self.detector.inference(image, visual=False)
         outputs = []
@@ -57,18 +56,18 @@ class Tracker():
 
         return image, outputs
 
-        def visual(self, img, output, cls_conf=0.35):
-            ratio = min(self.detecter.test_size[0] / img.shape[0], self.detecter.test_size[0] / img.shape[1])
-            if output is None:
-                return img
-            output = output.cpu()
-            bboxes = output[:, 0:4]
-            # preprocessing: resize
-            bboxes /= ratio
-            cls = output[:, 6]
-            scores = output[:, 4] * output[:, 5]
-            vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
-            return vis_res
+    def visual(self, img, output, cls_conf=0.35):
+        ratio = min(self.detecter.test_size[0] / img.shape[0], self.detecter.test_size[0] / img.shape[1])
+        if output is None:
+            return img
+        output = output.cpu()
+        bboxes = output[:, 0:4]
+        # preprocessing: resize
+        bboxes /= ratio
+        cls = output[:, 6]
+        scores = output[:, 4] * output[:, 5]
+        vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
+        return vis_res
 
 
 if __name__=='__main__':
