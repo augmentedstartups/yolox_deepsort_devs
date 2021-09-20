@@ -48,7 +48,7 @@ class Tracker():
                 scores.append(score)
                 
             bbox_xywh = torch.Tensor(bbox_xywh)
-            outputs = self.deepsort.update(bbox_xywh, scores, objectids,image)
+            outputs = self.deepsort.update(bbox_xywh, scores, info['class_ids'],image)
             if len(outputs) > 0:
                 image = vis_track(image, outputs)
 
