@@ -163,7 +163,7 @@ def vis_track(img, boxes):
 
         id = box[4]
         if id not in pts:
-          pts[id] = deque(maxlen= opt.trailslen)
+          pts[id] = deque(maxlen= 64)
 
         clsid = box[5]
 
