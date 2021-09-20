@@ -60,7 +60,7 @@ class Tracker():
         ratio = min(self.detector.test_size[0] / img.shape[0], self.detector.test_size[0] / img.shape[1])
         if output is None:
             return img
-        output = output.cpu()
+        # output = output.cpu()
         bboxes = output[:, 0:4]
         # preprocessing: resize
         bboxes /= ratio
