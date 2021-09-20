@@ -8,7 +8,7 @@ from yolox.exp.build import get_exp_by_name
 from yolox.data.data_augment import ValTransform
 from yolox.data.datasets import COCO_CLASSES
 from yolox.utils import postprocess, vis
-from yolox.utils.visualize import UI_box
+from yolox.utils.visualize import vis2
 
 
 
