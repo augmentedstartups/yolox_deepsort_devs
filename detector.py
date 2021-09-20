@@ -8,6 +8,8 @@ from yolox.exp.build import get_exp_by_name
 from yolox.data.data_augment import ValTransform
 from yolox.data.datasets import COCO_CLASSES
 from yolox.utils import postprocess, vis
+from yolox.utils.visualize import UI_box
+
 
 
 class Predictor():
@@ -59,7 +61,7 @@ class Predictor():
         img_info['box_nums'] = outputs.shape[0]
 
         if visual:
-            img_info['visual'] = vis(img_info['img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
+            img_info['visual'] = vis2(img_info['img'], img_info['boxes'], img_info['scores'], img_info['class_ids'], conf, COCO_CLASSES)
 
         logger.info("Infer time: {:.4f}s".format(time.time() - t0))
         return outputs, img_info
