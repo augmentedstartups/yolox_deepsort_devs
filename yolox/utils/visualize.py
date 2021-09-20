@@ -5,6 +5,9 @@
 import cv2
 import numpy as np
 from numpy import random
+from collections import deque
+
+pts = [deque(maxlen=30) for _ in range(9999)]
 
 __all__ = ["vis"]
 
@@ -161,6 +164,19 @@ def vis_track(img, boxes):
         text = '%d'%(id)
         txt_color = (255, 255, 255)
         font = cv2.FONT_HERSHEY_SIMPLEX
+        #bbox_center_point(x,y)
+        center = (int(((box[0])+(box[2]))/2),int(((box[1])+(box[3]))/2))
+        pts[id].append(center)
+        thickness = 5
+        cv2.circle(img,  (center), 1, color, thickness)
+
+    #draw motion path
+        for j in range(1, len(pts[id])):
+            if pts[id][j - 1] is None or pts[id][j] is None:
+                continue
+            thickness = int(np.sqrt(64 / float(j + 1)) * 2)
+            cv2.line(img,(pts[id][j-1]), (pts[id][j]),(color),thickness)
+
 
         txt_size = cv2.getTextSize(text, font, 0.4, 1)[0]
         cv2.rectangle(img, (x0, y0), (x1, y1), color, 2)
@@ -174,6 +190,8 @@ def vis_track(img, boxes):
             -1
         )
         cv2.putText(img, text, (x0, y0 + txt_size[1]), font, 0.4, txt_color, thickness=1)
+
+        
 
     return img
 
