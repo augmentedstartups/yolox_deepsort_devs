@@ -57,7 +57,7 @@ class Tracker():
         return image, outputs
 
     def visual(self, img, output, cls_conf=0.35):
-        ratio = min(self.detecter.test_size[0] / img.shape[0], self.detecter.test_size[0] / img.shape[1])
+        ratio = min(self.detector.test_size[0] / img.shape[0], self.detector.test_size[0] / img.shape[1])
         if output is None:
             return img
         output = output.cpu()
