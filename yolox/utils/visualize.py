@@ -151,6 +151,7 @@ _COLORS = np.array(
 def vis_track(img, boxes):
     
     for i in range(len(boxes)):
+        print(len(boxes))
         box = boxes[i]
 
         x0 = int(box[0])
@@ -160,6 +161,7 @@ def vis_track(img, boxes):
 
         id = box[4]
         clsid = box[5]
+
         color = color = compute_color_for_labels(clsid)
         text = '%d'%(id)
         txt_color = (255, 255, 255)
