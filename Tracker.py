@@ -37,22 +37,20 @@ class Tracker():
         if info['box_nums']>0:
             bbox_xywh = []
             scores = []
+            objectids = []
             #bbox_xywh = torch.zeros((info['box_nums'], 4))
             for [x1, y1, x2, y2], class_id, score  in zip(info['boxes'],info['class_ids'],info['scores']):
                 if self.filter_class and class_names[int(class_id)] not in self.filter_class:
                     continue
                 # color = compute_color_for_labels(int(class_id))
-                bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])                
+                bbox_xywh.append([int((x1+x2)/2), int((y1+y2)/2), x2-x1, y2-y1])  
+                objectids.append(info['class_ids'])             
                 scores.append(score)
                 
             bbox_xywh = torch.Tensor(bbox_xywh)
-            outputs = self.deepsort.update(bbox_xywh, scores, image)
+            outputs = self.deepsort.update(bbox_xywh, scores, objectids,image)
             if len(outputs) > 0:
-                bbox_xyxy = outputs[:, :4]
-                identities = outputs[:, -2]
-                object_id = outputs[:, -1]
-                # draw_boxes(image, bbox_xyxy, object_id,identities)
-                image = vis_track(image, outputs, info['class_ids'])
+                image = vis_track(image, outputs)
 
         return image, outputs
 

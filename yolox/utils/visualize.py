@@ -152,15 +152,13 @@ def vis_track(img, boxes, object_id):
     
     for i in range(len(boxes)):
         box = boxes[i]
-        print(len(box))
-
         x0 = int(box[0])
         y0 = int(box[1])
         x1 = int(box[2])
         y1 = int(box[3])
 
         id = box[4]
-        clsid = object_id[i]
+        clsid = box[5]
 
         color = compute_color_for_labels(clsid)
         text = '%d'%(id)
