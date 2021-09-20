@@ -70,12 +70,12 @@ if __name__=='__main__':
     frame_count = 0
     fps = 0.0
     while True:
-        t1 = time.time()
         ret_val, frame = cap.read() # read frame from video
-        x = [100,100 , 300,300]
+        x = [10,10 , 30,30]
         c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
-        label = "FPS: %f"%(fps)
-        UI_box(x, frame, (211, 232, 21), label, 2)
+        label = "FPS: %.2f"%(fps)
+        UI_box(x, frame, (211, 232, 21), label, 4, boundingbox)
+        t1 = time.time()
         if ret_val:
             img_visual, bbox = tracker.update(frame)  # feed one frame and get result
             vid_writer.write(img_visual)
