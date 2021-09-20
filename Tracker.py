@@ -32,7 +32,9 @@ class Tracker():
                             use_cuda=True)
         self.filter_class = filter_class
     def update(self, image):
+        print(image.shape)
         _,info = self.detector.inference(image, visual=True)
+        print(image.shape)
         outputs = []
         if info['box_nums']>0:
             bbox_xywh = []
@@ -53,6 +55,7 @@ class Tracker():
                 object_id = outputs[:, -1]
                 # draw_boxes(image, bbox_xyxy, object_id,identities)
                 image = vis_track(image, outputs)
+                print(image.shape)  
 
         return image, outputs
 
