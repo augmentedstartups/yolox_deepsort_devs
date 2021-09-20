@@ -63,7 +63,7 @@ class Track:
 
     """
 
-    def __init__(self, mean, covariance, track_id, n_init, max_age,
+    def __init__(self, mean, covariance, track_id, n_init, max_age,oid,
                  feature=None):
         self.mean = mean
         self.covariance = covariance
@@ -71,6 +71,7 @@ class Track:
         self.hits = 1
         self.age = 1
         self.time_since_update = 0
+        self.oid = oid
 
         self.state = TrackState.Tentative
         self.features = []
@@ -109,6 +110,10 @@ class Track:
         ret[2:] = ret[:2] + ret[2:]
         return ret
 
+    def increment_age(self):
+        self.age += 1
+        self.time_since_update += 1
+
     def predict(self, kf):
         """Propagate the state distribution to the current time step using a
         Kalman filter prediction step.
@@ -120,8 +125,7 @@ class Track:
 
         """
         self.mean, self.covariance = kf.predict(self.mean, self.covariance)
-        self.age += 1
-        self.time_since_update += 1
+        self.increment_age()
 
     def update(self, kf, detection):
         """Perform Kalman filter measurement update step and update the feature
