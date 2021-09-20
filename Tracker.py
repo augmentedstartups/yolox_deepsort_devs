@@ -71,7 +71,7 @@ if __name__=='__main__':
     fps = 0.0
     while True:
         ret_val, frame = cap.read() # read frame from video
-        x = [10,10 , 30,30]
+        x = [100,100 , 200,200]
         c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
         label = "FPS: %.2f"%(fps)
         UI_box(x, frame, (211, 232, 21), label, 4, False)
