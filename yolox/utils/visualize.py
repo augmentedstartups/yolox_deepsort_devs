@@ -148,7 +148,7 @@ _COLORS = np.array(
 ).astype(np.float32).reshape(-1, 3)
 
 
-def vis_track(img, boxes):
+def vis_track(img, boxes, object_id):
     
     for i in range(len(boxes)):
         box = boxes[i]
@@ -160,9 +160,9 @@ def vis_track(img, boxes):
         y1 = int(box[3])
 
         id = box[4]
-        clsid = box[5]
+        clsid = object_id[i]
 
-        color = color = compute_color_for_labels(clsid)
+        color = compute_color_for_labels(clsid)
         text = '%d'%(id)
         txt_color = (255, 255, 255)
         font = cv2.FONT_HERSHEY_SIMPLEX

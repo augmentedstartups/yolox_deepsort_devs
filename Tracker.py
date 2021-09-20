@@ -52,7 +52,7 @@ class Tracker():
                 identities = outputs[:, -2]
                 object_id = outputs[:, -1]
                 # draw_boxes(image, bbox_xyxy, object_id,identities)
-                image = vis_track(image, outputs)
+                image = vis_track(image, outputs, info['class_ids'])
 
         return image, outputs
 
