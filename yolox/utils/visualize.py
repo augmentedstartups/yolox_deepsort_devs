@@ -8,6 +8,8 @@ from numpy import random
 
 __all__ = ["vis"]
 
+palette = (2 ** 11 - 1, 2 ** 15 - 1, 2 ** 20 - 1)
+
 
 
 def vis(img, boxes, scores, cls_ids, conf=0.5, class_names=None):
