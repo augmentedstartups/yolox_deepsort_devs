@@ -52,22 +52,10 @@ class Tracker():
                 identities = outputs[:, -2]
                 object_id = outputs[:, -1]
                 # draw_boxes(image, bbox_xyxy, object_id,identities)
-                image = self.visual(image, outputs)
+                image = vis_track(image, outputs)
 
         return image, outputs
 
-    def visual(self, img, output, cls_conf=0.35):
-        ratio = min(self.detector.test_size[0] / img.shape[0], self.detector.test_size[0] / img.shape[1])
-        if output is None:
-            return img
-        # output = output.cpu()
-        bboxes = output[:, 0:4]
-        # preprocessing: resize
-        bboxes /= ratio
-        cls = output[:, 6]
-        scores = output[:, 4] * output[:, 5]
-        vis_res = vis(img, bboxes, scores, cls, cls_conf, self.cls_names)
-        return vis_res
 
 
 if __name__=='__main__':
