@@ -169,7 +169,6 @@ def vis_track(img, boxes):
 
         color = compute_color_for_labels(clsid)
         text = '%d'%(id)
-        cv2.rectangle(img, (x0, y0), (x1, y1), color, 2)
         txt_color = (255, 255, 255)
         font = cv2.FONT_HERSHEY_SIMPLEX
         #bbox_center_point(x,y)
@@ -208,10 +207,10 @@ def UI_box(x, img, color=None,label=None,line_thickness=None):
     tl = line_thickness or round(0.002 * (img.shape[0] + img.shape[1]) / 2) + 1  # line/font thickness
     color = color or [random.randint(0, 255) for _ in range(3)]
     c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
+    cv2.rectangle(img, c1, c2, color, 1)
     if label:
         tf = max(tl - 1, 1)  # font thickness
         t_size = cv2.getTextSize(label, 0, fontScale=tl / 3, thickness=tf)[0]
-        
         img = draw_border(img, (c1[0], c1[1] - t_size[1] -3), (c1[0] + t_size[0], c1[1]+3), color, 1, 8, 2)
         cv2.putText(img, label, (c1[0], c1[1] - 2), 0, tl / 3, [225, 255, 255], thickness=tf, lineType=cv2.LINE_AA)
 
