@@ -169,6 +169,7 @@ def vis_track(img, boxes):
 
         color = compute_color_for_labels(clsid)
         text = '%d'%(id)
+        cv2.rectangle(img, (x0, y0), (x1, y1), color, 2)
         txt_color = (255, 255, 255)
         font = cv2.FONT_HERSHEY_SIMPLEX
         #bbox_center_point(x,y)
