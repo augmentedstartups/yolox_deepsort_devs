@@ -151,8 +151,8 @@ _COLORS = np.array(
 def vis_track(img, boxes):
     
     for i in range(len(boxes)):
-        print(len(boxes))
         box = boxes[i]
+        print(len(box))
 
         x0 = int(box[0])
         y0 = int(box[1])
