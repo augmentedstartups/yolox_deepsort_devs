@@ -159,8 +159,8 @@ def vis_track(img, boxes):
         y1 = int(box[3])
 
         id = box[4]
-        color_ = _COLORS[id%_COLORS.shape[0]]
-        color = (color_ * 255).astype(np.uint8).tolist()
+        clsid = box[5]
+        color = color = compute_color_for_labels(clsid)
         text = '%d'%(id)
         txt_color = (255, 255, 255)
         font = cv2.FONT_HERSHEY_SIMPLEX
@@ -176,22 +176,6 @@ def vis_track(img, boxes):
                 continue
             thickness = int(np.sqrt(64 / float(j + 1)) * 2)
             cv2.line(img,(pts[id][j-1]), (pts[id][j]),(color),thickness)
-
-
-        txt_size = cv2.getTextSize(text, font, 0.4, 1)[0]
-        cv2.rectangle(img, (x0, y0), (x1, y1), color, 2)
-
-        txt_bk_color = (color_ * 255 * 0.7).astype(np.uint8).tolist()
-        cv2.rectangle(
-            img,
-            (x0, y0 + 1),
-            (x0 + txt_size[0] + 1, y0 + int(1.5*txt_size[1])),
-            txt_bk_color,
-            -1
-        )
-        cv2.putText(img, text, (x0, y0 + txt_size[1]), font, 0.4, txt_color, thickness=1)
-
-        
 
     return img
 
