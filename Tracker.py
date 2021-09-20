@@ -74,7 +74,7 @@ if __name__=='__main__':
         if ret_val:
             img_visual, bbox = tracker.update(frame)  # feed one frame and get result
             vid_writer.write(img_visual)
-            if frame_count == 100:
+            if frame_count == 500:
                 break
             frame_count +=1
             ch = cv2.waitKey(1)
