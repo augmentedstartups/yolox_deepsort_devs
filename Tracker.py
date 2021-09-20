@@ -7,7 +7,7 @@ from deep_sort.deep_sort import DeepSort
 import torch
 import cv2
 from yolox.utils import vis
-from yolox.utils.visualize import vis_track
+from yolox.utils.visualize import vis_track, draw_border, UI_box
 
 from yolox.exp import get_exp
 import numpy as np
@@ -68,18 +68,24 @@ if __name__=='__main__':
         'video_tracked.mp4', cv2.VideoWriter_fourcc(*"mp4v"), fps, (int(width), int(height))
     ) # open one video
     frame_count = 0
+    fps = 0.0
     while True:
+        t1 = time.time()
         ret_val, frame = cap.read() # read frame from video
-        
+        x = [100,100 , 300,300]
+        c1, c2 = (int(x[0]), int(x[1])), (int(x[2]), int(x[3]))
+        label = "FPS: %f"%(fps)
+        UI_box(x, frame, (211, 232, 21), label, 2)
         if ret_val:
             img_visual, bbox = tracker.update(frame)  # feed one frame and get result
             vid_writer.write(img_visual)
-            # if frame_count == 500:
-            #     break
+            if frame_count == 100:
+                break
             frame_count +=1
             ch = cv2.waitKey(1)
             if ch == 27 or ch == ord("q") or ch == ord("Q"):
                 break
+            fps  = ( fps + (1./(time.time()-t1)) ) / 2
         else:
             break
 
