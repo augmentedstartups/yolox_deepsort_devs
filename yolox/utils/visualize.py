@@ -51,7 +51,7 @@ def vis2(img, boxes, scores, cls_ids, conf=0.5, class_names=None):
         score = scores[i]
         if score < conf:
             continue
-        img = UI_box(box, img, color=None,label=class_names[cls_id],line_thickness=None)
+        UI_box(box, img, color=None,label=class_names[cls_id],line_thickness=2)
 
     return img
 
