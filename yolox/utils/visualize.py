@@ -51,7 +51,8 @@ def vis2(img, boxes, scores, cls_ids, conf=0.5, class_names=None):
         score = scores[i]
         if score < conf:
             continue
-        UI_box(box, img, color=None,label=class_names[cls_id],line_thickness=2)
+        
+        UI_box(box, img, color=compute_color_for_labels(cls_id),label=class_names[cls_id],line_thickness=2)
 
     return img
 
@@ -174,6 +175,21 @@ def vis_track(img, boxes):
 
     return img
 
+def compute_color_for_labels(label):
+    """
+    Simple function that adds fixed color depending on the class
+    """
+    if label == 0: #person  #BGR
+        color = (85,45,255)
+    elif label == 2: # Car
+        color = (222,82,175)
+    elif label == 3:  # Motobike
+        color = (0, 204, 255)
+    elif label == 5:  # Bus
+        color = (0, 149, 255)
+    else:
+        color = [int((p * (label ** 2 - label + 1)) % 255) for p in palette]
+    return tuple(color)
 
 def UI_box(x, img, color=None,label=None,line_thickness=None):
     # Plots one bounding box on image img
